@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.ramola.books.MainActivity" >
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/magnifyingglass"
+        android:title="Search"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+</menu>
