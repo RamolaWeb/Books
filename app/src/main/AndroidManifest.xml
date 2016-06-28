@@ -3,7 +3,8 @@
     package="com.ramola.books">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -39,12 +40,18 @@
                 android:value="com.ramola.books.SearchActivity" />
         </activity>
         <activity
+            android:name=".ActivityUpload"
+            android:label="@string/title_activity_activity_upload"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateVisible|adjustResize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ramola.books.MainActivity" />
+        </activity>
+        <activity
             android:name=".WebActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".UploadActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateVisible|adjustResize"
-            />
     </application>
 
 </manifest>

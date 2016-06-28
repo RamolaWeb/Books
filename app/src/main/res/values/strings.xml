@@ -3,4 +3,5 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_search">SearchActivity</string>
     <string name="title_activity_detail_book">DetailBook</string>
+    <string name="title_activity_activity_upload">ActivityUpload</string>
 </resources>

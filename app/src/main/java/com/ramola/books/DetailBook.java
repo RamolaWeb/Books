@@ -1,18 +1,17 @@
 package com.ramola.books;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
-import net.steamcrafted.loadtoast.LoadToast;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -26,10 +25,11 @@ public class DetailBook extends AppCompatActivity {
     private static final String TITLE ="title" ;
     private static final String ID = "id";
     private static final String ADDRESS = "url";
-    private LoadToast loadToast;
     private AspectImageView imageView;
     private TextView title, description, author, year, publisher, page;
     private String url;
+    private ProgressBar progressBar;
+    private LinearLayout layout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,13 +37,8 @@ public class DetailBook extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        loadToast = new LoadToast(this);
-        loadToast.setTranslationY(100);
         Intent intent = getIntent();
         imageView= (AspectImageView) findViewById(R.id.image_detail_book);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            imageView.setTransitionName("Transition");
-        }
         title = (TextView) findViewById(R.id.title_detail_book);
         description = (TextView) findViewById(R.id.description_detail_book);
         author = (TextView) findViewById(R.id.author_detail_book);
@@ -57,7 +52,6 @@ public class DetailBook extends AppCompatActivity {
         page.setTypeface(TypeFaceManager.getRegular());
         if (intent.hasExtra(ID)) {
             getSupportActionBar().setTitle(intent.getStringExtra(TITLE));
-            loadToast.show();
             sendRequest(intent.getLongExtra(ID, 0l));
         }
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -65,11 +59,15 @@ public class DetailBook extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(url!=null){
+
                Intent webIntent=new Intent(DetailBook.this,WebActivity.class);
                 webIntent.putExtra(ADDRESS,url);
                 startActivity(webIntent);}
             }
         });
+
+        progressBar= (ProgressBar) findViewById(R.id.progressbar_detail);
+        layout= (LinearLayout) findViewById(R.id.layout_detail_book);
     }
 
     private BookService getService() {
@@ -87,9 +85,10 @@ public class DetailBook extends AppCompatActivity {
         call.enqueue(new Callback<BookDetail>() {
             @Override
             public void onResponse(Call<BookDetail> call, Response<BookDetail> response) {
+                progressBar.setVisibility(View.GONE);
+                layout.setVisibility(View.VISIBLE);
                 BookDetail bookDetail = response.body();
                 if (!bookDetail.getError().equalsIgnoreCase("Book not found!")) {
-                    loadToast.success();
                     url=bookDetail.getDownload();
                     title.setText(bookDetail.getTitle());
                     description.setText(bookDetail.getDescription());
@@ -99,14 +98,13 @@ public class DetailBook extends AppCompatActivity {
                     year.setText(bookDetail.getYear());
                     Glide.with(DetailBook.this).load(bookDetail.getImage()).placeholder(R.drawable.booksstackofthree).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageView);
                 } else {
-                    loadToast.error();
+
                 }
             }
 
             @Override
             public void onFailure(Call<BookDetail> call, Throwable t) {
                 t.printStackTrace();
-                loadToast.error();
             }
         });
     }

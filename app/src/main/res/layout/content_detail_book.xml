@@ -9,176 +9,190 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.ramola.books.DetailBook"
     tools:showIn="@layout/activity_detail_book">
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        >
+        <ProgressBar
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:id="@+id/progressbar_detail"/>
 
-        <android.support.v7.widget.CardView
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/layout_detail_book"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            card_view:cardCornerRadius="2dp"
-            card_view:cardElevation="8dp"
-            card_view:cardUseCompatPadding="true">
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.ramola.books.AspectImageView
-                    android:id="@+id/image_detail_book"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="4dp"
-                    android:src="@drawable/booksstackofthree" />
-
-                <TextView
-                    android:textAppearance="@android:style/TextAppearance.Large"
-                    android:id="@+id/title_detail_book"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="4dp"
-                    android:textSize="20sp" />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            card_view:cardCornerRadius="2dp"
-            card_view:cardElevation="8dp"
-            card_view:cardUseCompatPadding="true">
-
-            <LinearLayout
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="10dp"
+                card_view:cardCornerRadius="2dp"
+                card_view:cardElevation="8dp"
+                card_view:cardUseCompatPadding="true">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Book Description"
-                    android:textAppearance="@android:style/TextAppearance.Large"
-                    android:textSize="20sp" />
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/description_detail_book"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="4dp"
-                    android:textSize="15sp" />
-            </LinearLayout>
+                    <com.ramola.books.AspectImageView
+                        android:id="@+id/image_detail_book"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="4dp"
+                        android:src="@drawable/booksstackofthree" />
 
-        </android.support.v7.widget.CardView>
+                    <TextView
+                        android:textAppearance="@android:style/TextAppearance.Large"
+                        android:id="@+id/title_detail_book"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="4dp"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            card_view:cardCornerRadius="2dp"
-            card_view:cardElevation="8dp"
-            card_view:cardUseCompatPadding="true">
-
-            <LinearLayout
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="10dp"
+                card_view:cardCornerRadius="2dp"
+                card_view:cardElevation="8dp"
+                card_view:cardUseCompatPadding="true">
 
                 <LinearLayout
-                    android:padding="4dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Author"
+                        android:text="Book Description"
                         android:textAppearance="@android:style/TextAppearance.Large"
-                        android:textSize="15sp" />
+                        android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/author_detail_book"
+                        android:id="@+id/description_detail_book"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:padding="4dp"
                         android:textSize="15sp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:padding="4dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+            </android.support.v7.widget.CardView>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Year"
-                        android:textAppearance="@android:style/TextAppearance.Large"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/year_detail_book"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="15sp" />
-                </LinearLayout>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                card_view:cardCornerRadius="2dp"
+                card_view:cardElevation="8dp"
+                card_view:cardUseCompatPadding="true">
 
                 <LinearLayout
-                    android:padding="4dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:orientation="vertical">
 
-                    <TextView
+                    <LinearLayout
+                        android:padding="4dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Page"
-                        android:textAppearance="@android:style/TextAppearance.Large"
-                        android:textSize="15sp" />
+                        android:layout_weight="1">
 
-                    <TextView
-                        android:id="@+id/page_detail_book"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Author"
+                            android:textAppearance="@android:style/TextAppearance.Large"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/author_detail_book"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:padding="4dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="15sp" />
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Year"
+                            android:textAppearance="@android:style/TextAppearance.Large"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/year_detail_book"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:padding="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Page"
+                            android:textAppearance="@android:style/TextAppearance.Large"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/page_detail_book"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:padding="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Publisher"
+                            android:textAppearance="@android:style/TextAppearance.Large"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/publisher_detail_book"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
                 </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
 
-                <LinearLayout
-                    android:padding="4dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Publisher"
-                        android:textAppearance="@android:style/TextAppearance.Large"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/publisher_detail_book"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-    </LinearLayout>
+</RelativeLayout>
 </ScrollView>
