@@ -22,7 +22,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DetailBook extends AppCompatActivity {
-    private static final String TITLE ="title" ;
+    private static final String TITLE = "title";
     private static final String ID = "id";
     private static final String ADDRESS = "url";
     private AspectImageView imageView;
@@ -30,6 +30,7 @@ public class DetailBook extends AppCompatActivity {
     private String url;
     private ProgressBar progressBar;
     private LinearLayout layout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +39,7 @@ public class DetailBook extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
-        imageView= (AspectImageView) findViewById(R.id.image_detail_book);
+        imageView = (AspectImageView) findViewById(R.id.image_detail_book);
         title = (TextView) findViewById(R.id.title_detail_book);
         description = (TextView) findViewById(R.id.description_detail_book);
         author = (TextView) findViewById(R.id.author_detail_book);
@@ -58,22 +59,22 @@ public class DetailBook extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(url!=null){
-
+                if (url != null) {
                Intent webIntent=new Intent(DetailBook.this,WebActivity.class);
                 webIntent.putExtra(ADDRESS,url);
-                startActivity(webIntent);}
+                startActivity(webIntent);
+                }
             }
         });
 
-        progressBar= (ProgressBar) findViewById(R.id.progressbar_detail);
-        layout= (LinearLayout) findViewById(R.id.layout_detail_book);
+        progressBar = (ProgressBar) findViewById(R.id.progressbar_detail);
+        layout = (LinearLayout) findViewById(R.id.layout_detail_book);
     }
 
     private BookService getService() {
-        HttpLoggingInterceptor loggingInterceptor=new HttpLoggingInterceptor();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
-        OkHttpClient.Builder oBuilder=new OkHttpClient.Builder();
+        OkHttpClient.Builder oBuilder = new OkHttpClient.Builder();
         oBuilder.addNetworkInterceptor(loggingInterceptor);
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://it-ebooks-api.info/v1/").addConverterFactory(GsonConverterFactory.create()).client(oBuilder.build()).build();
         BookService service = retrofit.create(BookService.class);
@@ -89,7 +90,7 @@ public class DetailBook extends AppCompatActivity {
                 layout.setVisibility(View.VISIBLE);
                 BookDetail bookDetail = response.body();
                 if (!bookDetail.getError().equalsIgnoreCase("Book not found!")) {
-                    url=bookDetail.getDownload();
+                    url = bookDetail.getDownload();
                     title.setText(bookDetail.getTitle());
                     description.setText(bookDetail.getDescription());
                     author.setText(bookDetail.getAuthor());

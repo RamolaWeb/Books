@@ -11,11 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class ActivityUpload extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST =1 ;
-    private UploadView uploadView;
-    private onDrawListener listener;
+    private EditorView editorView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +24,8 @@ public class ActivityUpload extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setIcon(R.drawable.close);
-        uploadView= (UploadView) findViewById(R.id.uploadView);
+        editorView= (EditorView) findViewById(R.id.editor);
+
     }
 
     @Override
@@ -65,15 +66,7 @@ public class ActivityUpload extends AppCompatActivity {
             c.close();
             Bitmap bitmap = BitmapFactory.decodeFile(imgDecodableString);
           Bitmap bitmap1=Bitmap.createScaledBitmap(bitmap,getWindow().getWindowManager().getDefaultDisplay().getWidth()/2,getWindow().getWindowManager().getDefaultDisplay().getHeight()/2,true);
-            listener.deliverBitmap(bitmap1);
+            editorView.addImage(bitmap1);
         }
-    }
-
-    public interface onDrawListener{
-        void deliverBitmap(Bitmap bitmap);
-    }
-
-    public void setListener(onDrawListener listener) {
-        this.listener = listener;
     }
 }
