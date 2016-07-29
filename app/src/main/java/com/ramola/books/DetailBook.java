@@ -1,7 +1,12 @@
 package com.ramola.books;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsClient;
+import android.support.customtabs.CustomTabsIntent;
+import android.support.customtabs.CustomTabsServiceConnection;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,12 +30,14 @@ public class DetailBook extends AppCompatActivity {
     private static final String TITLE = "title";
     private static final String ID = "id";
     private static final String ADDRESS = "url";
+    private static final String PACKAGE_NAME ="com.android.chrome" ;
     private AspectImageView imageView;
     private TextView title, description, author, year, publisher, page;
     private String url;
     private ProgressBar progressBar;
     private LinearLayout layout;
 
+    private CustomTabsClient c;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,15 +67,34 @@ public class DetailBook extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (url != null) {
-               Intent webIntent=new Intent(DetailBook.this,WebActivity.class);
-                webIntent.putExtra(ADDRESS,url);
-                startActivity(webIntent);
+                    CustomTabsIntent.Builder builder=new CustomTabsIntent.Builder();
+                    CustomTabsIntent customTabsIntent=builder.build();
+                    customTabsIntent.launchUrl(DetailBook.this, Uri.parse(url));
                 }
             }
         });
 
         progressBar = (ProgressBar) findViewById(R.id.progressbar_detail);
         layout = (LinearLayout) findViewById(R.id.layout_detail_book);
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        CustomTabsClient.bindCustomTabsService(this, PACKAGE_NAME, new CustomTabsServiceConnection() {
+            @Override
+            public void onCustomTabsServiceConnected(ComponentName componentName, CustomTabsClient customTabsClient) {
+                c=customTabsClient;
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName componentName) {
+             c=null;
+            }
+        });
+
+        if(c!=null) c.warmup(0);
     }
 
     private BookService getService() {

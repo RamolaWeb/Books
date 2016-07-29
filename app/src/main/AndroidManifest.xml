@@ -49,9 +49,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ramola.books.MainActivity" />
         </activity>
-        <activity
-            android:name=".WebActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
