@@ -11,7 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ActivityUpload extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST =1 ;
@@ -68,5 +72,14 @@ public class ActivityUpload extends AppCompatActivity {
           Bitmap bitmap1=Bitmap.createScaledBitmap(bitmap,getWindow().getWindowManager().getDefaultDisplay().getWidth()/2,getWindow().getWindowManager().getDefaultDisplay().getHeight()/2,true);
             editorView.addImage(bitmap1);
         }
+    }
+    private BookService getService() {
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
+        OkHttpClient.Builder oBuilder = new OkHttpClient.Builder();
+        oBuilder.addNetworkInterceptor(loggingInterceptor);
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://it-ebooks-api.info/v1/").addConverterFactory(GsonConverterFactory.create()).client(oBuilder.build()).build();
+        BookService service = retrofit.create(BookService.class);
+        return service;
     }
 }

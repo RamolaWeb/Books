@@ -125,7 +125,6 @@ public class SearchActivity extends AppCompatActivity {
             adapterBook.removeItem(null);
         }
         else {
-            progressBar.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
         }
         Call<Bookresponse> call = getService().getBookResult(keyword, pageno);
@@ -134,6 +133,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onResponse(Call<Bookresponse> call, Response<Bookresponse> response) {
                 totalBooks = Integer.parseInt(response.body().getTotalResult());
                 if (totalBooks > 0) {
+                    progressBar.setVisibility(View.GONE);
                     for (Book book : response.body().getBooks()) {
                         list.add(book);
                     }

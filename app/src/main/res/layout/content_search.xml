@@ -7,17 +7,17 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.ramola.books.SearchActivity"
     tools:showIn="@layout/activity_search">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
     <ProgressBar
-        android:layout_centerInParent="true"
-        android:visibility="gone"
         android:id="@+id/progress"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/Widget.AppCompat.ProgressBar"/>
-<android.support.v7.widget.RecyclerView
-    android:visibility="gone"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/list"/>
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 </RelativeLayout>
